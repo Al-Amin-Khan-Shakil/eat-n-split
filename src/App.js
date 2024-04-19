@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from './components/Button';
 import FriendsList from './components/FriendsList';
+import FormAddFriend from './components/FormAddFriend';
 
 const initialFriends = [
   {
@@ -43,11 +44,9 @@ function App() {
   };
 
   const handleSplitBill = (value) => {
-    setFriends((friends) => friends.map((friend) => {
-      friend.id === selectedFriend.id
-        ? { ...friend, balance: friend.balance + value }
-        : friend;
-    }));
+    setFriends((friends) => friends.map((friend) => (friend.id === selectedFriend.id
+      ? { ...friend, balance: friend.balance + value }
+      : friend)));
 
     setSelectedFriend(null);
   };
