@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { React, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { v4 as uuidv4 } from 'uuid';
 
 const FormAddFriend = ({ onAddFriend }) => {
   const [name, setName] = useState('');
@@ -11,7 +11,7 @@ const FormAddFriend = ({ onAddFriend }) => {
 
     if (!name || !image) return;
 
-    const id = crypto.randomUUID();
+    const id = uuidv4();
     const newFriend = {
       id,
       name,
@@ -27,21 +27,26 @@ const FormAddFriend = ({ onAddFriend }) => {
 
   return (
     <form className="form-add-friend" onSubmit={handleSubmit}>
-      <label>🫂 Friend name</label>
+      <label htmlFor="FriendName">🫂 Name</label>
       <input
+        id="FriendName"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
-      <label>🌄 Image URL</label>
+      <label htmlFor="FriendImage">🌄 Image URL</label>
       <input
+        id="FriendImage"
+        name="FriendImage"
         type="text"
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
 
-      <Button>Add</Button>
+      <button type="submit" className="button">
+        Add
+      </button>
     </form>
   );
 };

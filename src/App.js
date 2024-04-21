@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { React, useState } from 'react';
 import Button from './components/Button';
 import FriendsList from './components/FriendsList';
 import FormAddFriend from './components/FormAddFriend';
@@ -27,7 +27,7 @@ const initialFriends = [
 
 function App() {
   const [friends, setFriends] = useState(initialFriends);
-  const [showAddFriend, setShowAddFriend] = useState(false);
+  const [showAddFriend, setShowAddFriend] = useState(true);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   const handleShowAddFriend = () => {

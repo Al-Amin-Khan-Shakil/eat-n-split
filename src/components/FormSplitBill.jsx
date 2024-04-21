@@ -1,55 +1,56 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const FormSplitBill = ({ selectedFriend, onSplitBill }) => {
-  const [bill, setBill] = useState("");
-  const [paidByUser, setPaidByUser] = useState("");
-  const paidByFriend = bill ? bill - paidByUser : "";
-  const [whoIsPaying, setWhoIsPaying] = useState("user");
+  const [bill, setBill] = useState('');
+  const [paidByUser, setPaidByUser] = useState('');
+  const paidByFriend = bill ? bill - paidByUser : '';
+  const [whoIsPaying, setWhoIsPaying] = useState('user');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!bill || !paidByUser) return;
 
-    onSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUser);
+    onSplitBill(whoIsPaying === 'user' ? paidByFriend : -paidByUser);
   };
 
   return (
     <form className="form-split-bill" onSubmit={handleSubmit}>
       <h2>
-        {" "}
+        {' '}
         Split a bill with
         {selectedFriend.name}
       </h2>
 
       <label htmlFor="bill">💰 Bill value</label>
       <input
-        type="text"
+        id="bill"
+        type="number"
         value={bill}
         onChange={(e) => setBill(Number(e.target.value))}
       />
 
-      <label>🧍‍♀️ Your expense</label>
+      <label htmlFor="expense">🧍‍♀️ Your expense</label>
       <input
-        type="text"
+        id="expens"
+        type="number"
         value={paidByUser}
-        onChange={(e) =>
-          setPaidByUser(
-            Number(e.target.value) > bill ? paidByUser : Number(e.target.value)
-          )
-        }
+        onChange={(e) => setPaidByUser(
+          Number(e.target.value) > bill ? paidByUser : Number(e.target.value),
+        )}
       />
 
-      <label>
+      <label htmlFor="FriendExpense">
         👫
         {selectedFriend.name}
-        's expense
+        &apos;s expense
       </label>
-      <input type="text" disabled value={paidByFriend} />
+      <input type="text" disabled value={paidByFriend} id="FriendExpense" />
 
-      <label>🤑 Who is paying the bill</label>
+      <label htmlFor="paidBy">🤑 Who is paying the bill</label>
       <select
+        id="paidBy"
         value={whoIsPaying}
         onChange={(e) => setWhoIsPaying(e.target.value)}
       >
@@ -57,7 +58,9 @@ const FormSplitBill = ({ selectedFriend, onSplitBill }) => {
         <option value="friend">{selectedFriend.name}</option>
       </select>
 
-      <Button>Split bill</Button>
+      <button type="submit" className="button">
+        Split bill
+      </button>
     </form>
   );
 };

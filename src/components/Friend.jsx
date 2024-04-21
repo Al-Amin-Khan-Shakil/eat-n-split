@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import Button from './Button';
 
 const Friend = ({ friend, onSelection, selectedFriend }) => {
   const isSelected = selectedFriend?.id === friend.id;
@@ -9,7 +8,7 @@ const Friend = ({ friend, onSelection, selectedFriend }) => {
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
 
-      {friend.balance < 9 && (
+      {friend.balance < 0 && (
         <p className="red">
           You owe
           {' '}
@@ -39,9 +38,13 @@ const Friend = ({ friend, onSelection, selectedFriend }) => {
         </p>
       )}
 
-      <Button onClick={() => onSelection(friend)}>
+      <button
+        type="button"
+        onClick={() => onSelection(friend)}
+        className="button"
+      >
         {isSelected ? 'Close' : 'Select'}
-      </Button>
+      </button>
     </li>
   );
 };
